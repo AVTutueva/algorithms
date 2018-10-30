@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <string>
 #include "LinkedList.h"
 
 using namespace std;
@@ -16,9 +17,6 @@ LinkedList::LinkedList()
 }
 
 
-LinkedList::~LinkedList()
-{
-}
 
 void LinkedList::add_first(int newElem)
 {
@@ -91,4 +89,29 @@ int LinkedList::at(size_t index) const
 		}
 		return current->data;
 	}
+}
+
+Iterator * LinkedList::create_iterator()
+{
+	return new ListIterator(head);
+}
+
+LinkedList::ListIterator::ListIterator(Node * start)
+{
+	current = start;
+}
+
+int LinkedList::ListIterator::next()
+{
+	if (!has_next()) {
+		throw out_of_range("No more elements");
+	}
+	int temp = current->data;
+	current = current->next;
+	return temp;
+}
+
+bool LinkedList::ListIterator::has_next()
+{
+	return current != nullptr;
 }

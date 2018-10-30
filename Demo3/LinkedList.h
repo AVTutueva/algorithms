@@ -1,17 +1,8 @@
 #pragma once
+#include "Iterator.h"
+
 class LinkedList
 {
-public:
-	
-	LinkedList();
-	~LinkedList();
-
-	size_t get_size() const;
-	void push_back(int newElem);
-	void push_front(int newElem);
-	void pop_back();
-	int at(size_t index) const;
-
 private:
 	void add_first(int newElem);
 	void reset_list();
@@ -34,6 +25,27 @@ private:
 	Node * tail;
 	size_t size;
 
-};
+public:
 
-void add_first(int newElem);
+	LinkedList();
+
+	size_t get_size() const;
+	void push_back(int newElem);
+	void push_front(int newElem);
+	void pop_back();
+	int at(size_t index) const;
+	Iterator * create_iterator();
+
+	class ListIterator : public Iterator
+	{
+	public:
+		ListIterator(Node * start);
+		int next() override;
+		bool has_next() override;
+
+	private:
+		Node * current;
+	};
+
+
+};

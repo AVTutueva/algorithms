@@ -1,5 +1,6 @@
 #include <iostream>
 #include "LinkedList.h"
+#include "Iterator.h"
 
 using namespace std;
 
@@ -12,16 +13,12 @@ int main() {
 	lst.push_front(2);
 	lst.push_front(8);
 
-	lst.pop_back();
-	lst.pop_back();
-	lst.pop_back();
-	lst.pop_back();
-	lst.pop_back();
-	lst.pop_back();
-
-	for (size_t i = 0; i < lst.get_size(); i++) {
-		cout << lst.at(i) << " ";
+	Iterator * lst_iterator = lst.create_iterator();
+	while (lst_iterator->has_next()) {
+		cout << lst_iterator->next() << ' ';
 	}
+
+
 	cout << endl;
 
 	return 0;
